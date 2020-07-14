@@ -1,14 +1,8 @@
 package com.java.customerportal.enumeration;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import static com.java.customerportal.constant.Authority.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
+
 public enum Role {
     ROLE_USER(USER_AUTHORITIES),
     ROLE_HR(HR_AUTHORITIES),
@@ -17,4 +11,12 @@ public enum Role {
     ROLE_SUPER_ADMIN(SUPER_ADMIN_AUTHORITIES);
 
     private String[] authorities;
+
+    Role(String... authorities) {
+        this.authorities = authorities;
+    }
+
+    public String[] getAuthorities() {
+        return authorities;
+    }
 }
