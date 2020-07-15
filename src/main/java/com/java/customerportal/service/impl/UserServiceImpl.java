@@ -7,6 +7,7 @@ import com.java.customerportal.exception.domain.UsernameExistException;
 import com.java.customerportal.model.User;
 import com.java.customerportal.model.UserPrincipal;
 import com.java.customerportal.repository.UserRepository;
+import com.java.customerportal.service.EmailService;
 import com.java.customerportal.service.LoginAttemptService;
 import com.java.customerportal.service.UserService;
 import lombok.AllArgsConstructor;
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserRepository userRepository;
     private BCryptPasswordEncoder passwordEncoder;
     private LoginAttemptService loginAttemptService;
-
+    private EmailService emailService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -89,6 +90,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         userRepository.save(user);
         log.info("New user password: " + password);
+        emailService.sendNewPasswordEmail(firstName, password, email);
 
         return user;
     }
