@@ -21,7 +21,7 @@ import java.util.List;
 import static com.java.customerportal.constant.SecurityConstant.*;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
-@NoArgsConstructor
+
 @AllArgsConstructor
 @Component
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
