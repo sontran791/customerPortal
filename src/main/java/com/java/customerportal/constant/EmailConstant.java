@@ -3,7 +3,7 @@ package com.java.customerportal.constant;
 public class EmailConstant {
     public static final String SIMPLE_MAIL_TRANSFER_PROTOCOL = "smtps";
     public static final String USERNAME = "congsonit@gmail.com";
-    public static final String PASSWORD = "Congvuit791@";
+    public static final String PASSWORD = "Dell2020@";
     public static final String FROM_EMAIL = "support@customerPortal.com";
     public static final String CC_EMAIL = "";
     public static final String EMAIL_SUBJECT = "Customer Portal - New Password";
