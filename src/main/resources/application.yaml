@@ -2,7 +2,7 @@ jwt:
   secret: 'Testing_ABC_BGE_272727'
 
 server:
-  port: 8082
+  port: 8080
 
 spring:
   datasource:
