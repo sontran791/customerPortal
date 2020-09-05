@@ -2,7 +2,6 @@ package com.java.customerportal.enumeration;
 
 import static com.java.customerportal.constant.Authority.*;
 
-
 public enum Role {
     ROLE_USER(USER_AUTHORITIES),
     ROLE_HR(HR_AUTHORITIES),

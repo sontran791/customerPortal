@@ -25,7 +25,7 @@ public interface UserService {
                         String newEmail, String role, boolean isNonLocked,
                         boolean isActive, MultipartFile profileImage) throws Exception;
 
-    void deleteUser(long id);
+    void deleteUser(String userId);
 
     void resetPassword(String email) throws EmailNotFoundException, MessagingException;
 

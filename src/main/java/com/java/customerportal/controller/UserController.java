@@ -109,9 +109,9 @@ public class UserController extends ExceptionHandling {
 
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasAnyAuthority('user:delete')")
-    public ResponseEntity<HttpResponse> deleteUser(@PathVariable("id") long id) {
-        userService.deleteUser(id);
-        return response(HttpStatus.NO_CONTENT, USER_DELETED_SUCCESSFULLY);
+    public ResponseEntity<HttpResponse> deleteUser(@PathVariable("id") String userId) {
+        userService.deleteUser(userId);
+        return response(HttpStatus.OK, USER_DELETED_SUCCESSFULLY);
     }
 
     @PostMapping("/updateProfileImage")
