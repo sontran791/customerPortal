@@ -253,6 +253,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User updateProfileImage(String username, MultipartFile profileImage) throws Exception {
         User user = validateNewUserNameAndEmail(username, null, null);
         saveProfileImage(user, profileImage);
-        return null;
+        return user;
     }
 }
