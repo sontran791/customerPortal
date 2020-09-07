@@ -5,6 +5,7 @@ import com.java.customerportal.model.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
@@ -25,7 +26,7 @@ public interface UserService {
                         String newEmail, String role, boolean isNonLocked,
                         boolean isActive, MultipartFile profileImage) throws Exception;
 
-    void deleteUser(String userId);
+    void deleteUser(String username) throws IOException;
 
     void resetPassword(String email) throws EmailNotFoundException, MessagingException;
 

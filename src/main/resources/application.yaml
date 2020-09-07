@@ -13,10 +13,13 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
 #  mvc:
 #    throw-exception-if-no-handler-found: true
 #  resources:
 #    add-mappings: false
 logging:
   level.com.java.customerportal: trace
-

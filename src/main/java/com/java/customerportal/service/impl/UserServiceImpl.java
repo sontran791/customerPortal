@@ -1,10 +1,7 @@
 package com.java.customerportal.service.impl;
 
 import com.java.customerportal.enumeration.Role;
-import com.java.customerportal.exception.domain.EmailExistException;
-import com.java.customerportal.exception.domain.EmailNotFoundException;
-import com.java.customerportal.exception.domain.UserNotFoundException;
-import com.java.customerportal.exception.domain.UsernameExistException;
+import com.java.customerportal.exception.domain.*;
 import com.java.customerportal.model.User;
 import com.java.customerportal.model.UserPrincipal;
 import com.java.customerportal.repository.UserRepository;
@@ -15,7 +12,9 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,17 +25,20 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import static com.java.customerportal.constant.FileConstant.*;
 import static com.java.customerportal.constant.FileConstant.DEFAULT_USER_IMAGE_PATH;
 import static com.java.customerportal.constant.UserImplConstant.*;
+import static org.springframework.http.MediaType.*;
 
 @AllArgsConstructor
 @Slf4j
@@ -147,8 +149,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void deleteUser(String userId) {
-        User user = userRepository.findUserByUserId(userId);
+    public void deleteUser(String username) throws IOException {
+        User user = userRepository.findUserByUsername(username);
+        Path userFolder = Paths.get(USER_FOLDER + user.getUsername()).toAbsolutePath().normalize();
+        FileUtils.deleteDirectory(new File(userFolder.toString()));
         userRepository.deleteById(user.getId());
     }
 
@@ -173,8 +177,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return passwordEncoder.encode(password);
     }
 
-    private void saveProfileImage(User user, MultipartFile profileImage) throws IOException {
+    private void saveProfileImage(User user, MultipartFile profileImage) throws IOException, NotAnImageFileException {
         if(profileImage != null) {
+            if (!Arrays.asList(IMAGE_JPEG_VALUE, IMAGE_PNG_VALUE, IMAGE_GIF_VALUE).contains(profileImage.getContentType())) {
+                throw new NotAnImageFileException(profileImage.getOriginalFilename() + " is not an image file. Please upload an image.");
+            }
             Path userFolder = Paths.get(USER_FOLDER + user.getUsername() ).toAbsolutePath().normalize();
             if(!Files.exists(userFolder)) {
                 Files.createDirectories(userFolder);
