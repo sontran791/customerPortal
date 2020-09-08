@@ -17,7 +17,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
-
 @Configuration
 @EnableSwagger2
 @Import(BeanValidatorPluginsConfiguration.class)
@@ -35,7 +34,7 @@ public class SwaggerConfig {
         ArrayList<Parameter> parameters = new ArrayList<>();
         parameters.add(new ParameterBuilder()
                 .modelRef(new ModelRef("string"))
-                .name("Jwt_Token")
+                .name("Authorization")
                 .parameterType("header")
                 .required(true)
                 .build());
