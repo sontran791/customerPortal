@@ -2,8 +2,8 @@ package com.java.customerportal.service.impl;
 
 import com.java.customerportal.enumeration.Role;
 import com.java.customerportal.exception.domain.*;
-import com.java.customerportal.model.User;
-import com.java.customerportal.model.UserPrincipal;
+import com.java.customerportal.dao.User;
+import com.java.customerportal.dao.UserPrincipal;
 import com.java.customerportal.repository.UserRepository;
 import com.java.customerportal.service.EmailService;
 import com.java.customerportal.service.LoginAttemptService;
@@ -14,7 +14,6 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -47,10 +46,10 @@ import static org.springframework.http.MediaType.*;
 @Qualifier("userDetailsService")
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    private UserRepository userRepository;
-    private BCryptPasswordEncoder passwordEncoder;
-    private LoginAttemptService loginAttemptService;
-    private EmailService emailService;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final LoginAttemptService loginAttemptService;
+    private final EmailService emailService;
 
     @Override
     public UserDetails loadUserByUsername(String username) {
@@ -83,6 +82,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user= new User();
         user.setUserId(generateUserId());
         String password = generatePassword();
+        log.info("New user password: " + password);
         String encodedPassword = encodePassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -97,7 +97,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setProfileImageUrl(getTemporaryProfileImageUrl(username));
 
         userRepository.save(user);
-        log.info("New user password: " + password);
         emailService.sendNewPasswordEmail(firstName, password, email);
 
         return user;
@@ -180,7 +179,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private void saveProfileImage(User user, MultipartFile profileImage) throws IOException, NotAnImageFileException {
         if(profileImage != null) {
             if (!Arrays.asList(IMAGE_JPEG_VALUE, IMAGE_PNG_VALUE, IMAGE_GIF_VALUE).contains(profileImage.getContentType())) {
-                throw new NotAnImageFileException(profileImage.getOriginalFilename() + " is not an image file. Please upload an image.");
+                throw new NotAnImageFileException(profileImage.getOriginalFilename() + NOT_AN_IMAGE_FILE);
             }
             Path userFolder = Paths.get(USER_FOLDER + user.getUsername() ).toAbsolutePath().normalize();
             if(!Files.exists(userFolder)) {

@@ -1,7 +1,7 @@
 package com.java.customerportal.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.java.customerportal.model.HttpResponse;
+import com.java.customerportal.dao.HttpResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;

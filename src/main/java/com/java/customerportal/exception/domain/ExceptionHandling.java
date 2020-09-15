@@ -1,7 +1,7 @@
 package com.java.customerportal.exception.domain;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import com.java.customerportal.model.HttpResponse;
+import com.java.customerportal.dao.HttpResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpMethod;
@@ -15,7 +15,6 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.persistence.NoResultException;
 import java.io.IOException;
@@ -100,6 +99,12 @@ public class ExceptionHandling implements ErrorController {
 
     @ExceptionHandler(NotAnImageFileException.class)
     public ResponseEntity<HttpResponse> notAnImageFileException(NotAnImageFileException exception) {
+        log.error(exception.getMessage());
+        return createHttpResponse(BAD_REQUEST, exception.getMessage());
+    }
+
+    @ExceptionHandler(GifNotFoundException.class)
+    public ResponseEntity<HttpResponse> gifNotFoundException(GifNotFoundException exception) {
         log.error(exception.getMessage());
         return createHttpResponse(BAD_REQUEST, exception.getMessage());
     }

@@ -1,6 +1,6 @@
 package com.java.customerportal.repository;
 
-import com.java.customerportal.model.User;
+import com.java.customerportal.dao.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

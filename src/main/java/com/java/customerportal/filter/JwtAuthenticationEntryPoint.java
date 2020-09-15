@@ -1,7 +1,7 @@
 package com.java.customerportal.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.java.customerportal.model.HttpResponse;
+import com.java.customerportal.dao.HttpResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.stereotype.Component;

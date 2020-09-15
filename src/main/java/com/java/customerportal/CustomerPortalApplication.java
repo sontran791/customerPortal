@@ -3,6 +3,7 @@ package com.java.customerportal;
 import com.java.customerportal.constant.FileConstant;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
@@ -14,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @SpringBootApplication
+@EnableFeignClients
 public class CustomerPortalApplication {
 
     public static void main(String[] args) {
@@ -32,7 +34,7 @@ public class CustomerPortalApplication {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
-//        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://customerportalfrontend.s3-website.us-east-2.amazonaws.com"));
+        corsConfiguration.setAllowedOrigins(Collections.singletonList("http://customerportalfrontend.s3-website.us-east-2.amazonaws.com"));
         corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
                 "Accept", "Jwt-Token", "Authorization", "Origin, Accept", "X-Requested-With",
                 "Access-Control-Request-Method", "Access-Control-Request-Headers"));

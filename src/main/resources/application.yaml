@@ -3,12 +3,11 @@ jwt:
 
 server:
   port: 5000
-
 spring:
   datasource:
-    url: jdbc:mysql://cmr.ciygt781rl3w.us-east-2.rds.amazonaws.com:3306/customerportal
-    password: test1234
-    username: root
+    url: jdbc:mysql://localhost:3306/customerportal
+    password: letmein
+    username: letmein
   jpa:
     show-sql: true
     hibernate:
@@ -18,9 +17,18 @@ spring:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
+  h2:
+    console:
+      enabled: true
+      path: /console
 #  mvc:
 #    throw-exception-if-no-handler-found: true
 #  resources:
 #    add-mappings: false
 logging:
-  level.com.java.customerportal: debug
+  level:
+    com.java.customerportal: debug
+
+giphy:
+  apiToken: W6ohfYzWRCt1ITgG0kTqHBSCLGQupnW3
+  searchRating: g

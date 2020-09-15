@@ -2,9 +2,9 @@ package com.java.customerportal.controller;
 
 import com.java.customerportal.exception.domain.EmailNotFoundException;
 import com.java.customerportal.exception.domain.ExceptionHandling;
-import com.java.customerportal.model.HttpResponse;
-import com.java.customerportal.model.User;
-import com.java.customerportal.model.UserPrincipal;
+import com.java.customerportal.dao.HttpResponse;
+import com.java.customerportal.dao.User;
+import com.java.customerportal.dao.UserPrincipal;
 import com.java.customerportal.service.UserService;
 import com.java.customerportal.utility.JWTTokenProvider;
 import io.swagger.annotations.Api;

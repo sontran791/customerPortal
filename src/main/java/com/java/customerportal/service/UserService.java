@@ -1,7 +1,7 @@
 package com.java.customerportal.service;
 
 import com.java.customerportal.exception.domain.EmailNotFoundException;
-import com.java.customerportal.model.User;
+import com.java.customerportal.dao.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;

@@ -1,7 +1,7 @@
 package com.java.customerportal.listener;
 
-import com.java.customerportal.model.User;
-import com.java.customerportal.model.UserPrincipal;
+import com.java.customerportal.dao.User;
+import com.java.customerportal.dao.UserPrincipal;
 import com.java.customerportal.service.LoginAttemptService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;

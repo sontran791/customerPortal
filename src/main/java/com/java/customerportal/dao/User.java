@@ -1,4 +1,4 @@
-package com.java.customerportal.model;
+package com.java.customerportal.dao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
