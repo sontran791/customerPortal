@@ -1,10 +1,12 @@
 package com.java.customerportal.dto.gif;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.java.customerportal.configuration.LocalDateTimeDeserializer;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -16,11 +18,13 @@ public class GifDto {
     private GifVersionDto fixedHeightSmallStill;
     private GifVersionDto original;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "mm-dd-yyyy hh:mm:ss", timezone = "America/Chicago")
-    private Date importDateTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = LocalDateTimeDeserializer.GIPHY_DATETIME_FORMAT, timezone = "America/Chicago")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime importDatetime;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "mm-dd-yyyy hh:mm:ss", timezone = "America/Chicago")
-    private Date trendingDateTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = LocalDateTimeDeserializer.GIPHY_DATETIME_FORMAT, timezone = "America/Chicago")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime trendingDatetime;
 
     private Set<GifTagDto> tags;
 }

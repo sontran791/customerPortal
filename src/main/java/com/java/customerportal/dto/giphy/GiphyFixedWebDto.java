@@ -10,5 +10,5 @@ import lombok.Setter;
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class GiphyFixedWebDto extends GiphyStillDto{
     private String webp;
-    private String webSize;
+    private String webpSize;
 }

@@ -32,3 +32,9 @@ logging:
 giphy:
   apiToken: W6ohfYzWRCt1ITgG0kTqHBSCLGQupnW3
   searchRating: g
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: headers

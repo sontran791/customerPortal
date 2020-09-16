@@ -16,8 +16,8 @@ public class GifSearchController {
 
     @GetMapping
     public GifSearchResponseDto findGif(@RequestParam String q,
-                                        @RequestParam(required = false) Integer limit,
-                                        @RequestParam(required = false) Integer offset) {
+                                          @RequestParam(required = false) Integer limit,
+                                          @RequestParam(required = false) Integer offset) {
         return gifSearchService.findGif(q, limit, offset);
     }
 }

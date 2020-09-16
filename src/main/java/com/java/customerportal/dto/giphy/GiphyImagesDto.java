@@ -13,7 +13,7 @@ public class GiphyImagesDto {
     private GiphyStillDto downsized;
     private GiphyStillDto downsizedLarge;
     private GiphyStillDto downsizedMedium;
-    private GiphyStillDto downsizedSmall;
+    private GiphyMP4Dto downsizedSmall;
     private GiphyStillDto downsizedStill;
     private GiphyFixedDto fixedHeight;
     private GiphyFixedWebDto fixedHeightDownsampled;

@@ -2,11 +2,13 @@ package com.java.customerportal.dto.giphy;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.java.customerportal.configuration.LocalDateTimeDeserializer;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -28,11 +30,13 @@ public class GiphyDataDto {
     private String sourcePostUrl;
     private Boolean isSticker;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "mm-dd-yyyy hh:mm:ss", timezone = "America/Chicago")
-    private Date importDateTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = LocalDateTimeDeserializer.GIPHY_DATETIME_FORMAT, timezone = "America/Chicago")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime importDatetime;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "mm-dd-yyyy hh:mm:ss", timezone = "America/Chicago")
-    private Date trendingDateTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = LocalDateTimeDeserializer.GIPHY_DATETIME_FORMAT, timezone = "America/Chicago")
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    private LocalDateTime trendingDatetime;
 
     private GiphyImagesDto images;
     private GiphyAnalyticsDto analytics;
