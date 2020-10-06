@@ -2,8 +2,7 @@ jwt:
   secret: 'Testing_ABC_BGE_272727'
 
 server:
-  port: 8082
-
+  port: 5000
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/customerportal
@@ -13,10 +12,29 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  h2:
+    console:
+      enabled: true
+      path: /console
 #  mvc:
 #    throw-exception-if-no-handler-found: true
 #  resources:
 #    add-mappings: false
 logging:
-  level.com.java.customerportal: trace
+  level:
+    com.java.customerportal: debug
 
+giphy:
+  apiToken: W6ohfYzWRCt1ITgG0kTqHBSCLGQupnW3
+  searchRating: g
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: headers

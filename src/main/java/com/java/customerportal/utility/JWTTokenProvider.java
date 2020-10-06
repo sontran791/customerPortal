@@ -6,7 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import static com.java.customerportal.constant.SecurityConstant.*;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.java.customerportal.model.UserPrincipal;
+import com.java.customerportal.dao.UserPrincipal;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

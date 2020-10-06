@@ -1,13 +1,13 @@
 package com.java.customerportal.controller;
 
-import com.java.customerportal.constant.FileConstant;
 import com.java.customerportal.exception.domain.EmailNotFoundException;
 import com.java.customerportal.exception.domain.ExceptionHandling;
-import com.java.customerportal.model.HttpResponse;
-import com.java.customerportal.model.User;
-import com.java.customerportal.model.UserPrincipal;
+import com.java.customerportal.dao.HttpResponse;
+import com.java.customerportal.dao.User;
+import com.java.customerportal.dao.UserPrincipal;
 import com.java.customerportal.service.UserService;
 import com.java.customerportal.utility.JWTTokenProvider;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,15 +34,16 @@ import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 @RestController
 @AllArgsConstructor
 @RequestMapping(path = { "/user", "/" })
+@Api(tags = "User Endpoint", value = "Controller for User Service")
 public class UserController extends ExceptionHandling {
 
     public static final String AN_EMAIL_WITH_A_NEW_PASSWORD_WAS_SENT_TO = "An email with a new password was sent to: ";
     public static final String USER_DELETED_SUCCESSFULLY = "User deleted successfully";
-    private UserService userService;
+    private final UserService userService;
 
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    private JWTTokenProvider jwtTokenProvider;
+    private final JWTTokenProvider jwtTokenProvider;
 
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User user) {
@@ -106,11 +107,11 @@ public class UserController extends ExceptionHandling {
         return response(HttpStatus.OK, AN_EMAIL_WITH_A_NEW_PASSWORD_WAS_SENT_TO + email);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/{username}")
     @PreAuthorize("hasAnyAuthority('user:delete')")
-    public ResponseEntity<HttpResponse> deleteUser(@PathVariable("id") long id) {
-        userService.deleteUser(id);
-        return response(HttpStatus.NO_CONTENT, USER_DELETED_SUCCESSFULLY);
+    public ResponseEntity<HttpResponse> deleteUser(@PathVariable("username") String username) throws IOException {
+        userService.deleteUser(username);
+        return response(HttpStatus.OK, USER_DELETED_SUCCESSFULLY);
     }
 
     @PostMapping("/updateProfileImage")
