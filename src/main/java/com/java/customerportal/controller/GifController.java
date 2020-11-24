@@ -5,6 +5,7 @@ import com.java.customerportal.dto.gif.GifTagDto;
 import com.java.customerportal.dto.gif.TagRequestDto;
 import com.java.customerportal.exception.domain.ExceptionHandling;
 import com.java.customerportal.service.GifService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/gif")
 @AllArgsConstructor
+@Api(tags = "Gif Endpoint", value = "Controller for Gif Service")
 public class GifController extends ExceptionHandling {
     private final GifService gifService;
 

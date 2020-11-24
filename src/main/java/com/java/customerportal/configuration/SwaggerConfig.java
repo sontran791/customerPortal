@@ -28,7 +28,7 @@ public class SwaggerConfig {
                 .apiInfo(getApiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.java.customerportal"))
-                .paths(PathSelectors.ant("/user/**"))
+                .paths(PathSelectors.any())
                 .build();
 
         ArrayList<Parameter> parameters = new ArrayList<>();
