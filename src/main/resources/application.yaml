@@ -8,8 +8,8 @@ spring:
 #    url: jdbc:mysql://localhost:3306/customerportal
     driverClassName: org.h2.Driver
     url: jdbc:h2:mem:customerportal
-    password: sa
-    username:
+    password: 
+    username: sa
   jpa:
     show-sql: true
     hibernate:
